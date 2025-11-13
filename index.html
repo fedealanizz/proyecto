@@ -86,5 +86,174 @@
             <li><a><i class="bi bi-twitter"></i></a></li>
         </ul>
     </footer>
+<!-- SECCIÓN PARA JUGAR TRIVIA -->
+<section id="jugar-trivia">
+    <h2>¿Te animas a poner a prueba tus conocimientos sobre el Beato Faustino Oteiza Segura?</h2>
+    <button id="abrirTrivia">Comenzar Trivia</button>
+</section> 
+ <!-- MODAL -->
+ <div id="modalTrivia" class="modal">
+    <div class="modal-contenido">
+      <span class="cerrar">&times;</span>
+  
+      <!-- FORMULARIO DE TRIVIA -->
+      <h2>Trivia: Beato Faustino Oteiza Segura</h2>
+      <form id="formTrivia">
+        <p><strong>1.</strong> ¿Dónde y cuándo nació Faustino Oteiza Segura?</p>
+        <label><input type="radio" name="p1" value="Ayegui"> En Ayegui, Navarra, España, el 14 de febrero de 1890</label><br>
+        <label><input type="radio" name="p1" value="Peralta"> En Peralta de la Sal, Huesca, en 1905</label><br>
+        <label><input type="radio" name="p1" value="Zaragoza"> En Zaragoza, España, en 1913</label><br><br>
+  
+        <p><strong>2.</strong> ¿A qué orden religiosa pertenecía Faustino Oteiza?</p>
+        <label><input type="radio" name="p2" value="Franciscanos"> Orden de los Franciscanos</label><br>
+        <label><input type="radio" name="p2" value="Escolapios"> Orden de las Escuelas Pías (Escolapios)</label><br>
+        <label><input type="radio" name="p2" value="Jesuitas"> Orden de los Jesuitas</label><br><br>
+  
+        <p><strong>3.</strong> ¿Qué virtud destacó especialmente en su vida?</p>
+        <label><input type="radio" name="p3" value="Paciencia"> Su paciencia y perseverancia a pesar de la enfermedad</label><br>
+        <label><input type="radio" name="p3" value="Riqueza"> Su riqueza y poder político</label><br>
+        <label><input type="radio" name="p3" value="Fama"> Su fama como escritor público</label><br><br>
+  
+        <p><strong>4.</strong> ¿Qué le sucedió durante la Guerra Civil Española?</p>
+        <label><input type="radio" name="p4" value="Ejecutado"> Fue ejecutado junto al hermano Florentín Felipe en Azanuy</label><br>
+        <label><input type="radio" name="p4" value="Roma"> Fue trasladado a Roma para enseñar</label><br>
+        <label><input type="radio" name="p4" value="Retiro"> Se retiró por motivos de salud</label><br><br>
+  
+        <p><strong>5.</strong> ¿Qué frase representa mejor su pensamiento educativo?</p>
+        <label><input type="radio" name="p5" value="Grandeza"> “La verdadera grandeza se mide por la humildad y el servicio a los demás.”</label><br>
+        <label><input type="radio" name="p5" value="Fe"> “El conocimiento sin fe es suficiente para guiar al hombre.”</label><br>
+        <label><input type="radio" name="p5" value="Fuerza"> “Solo los más fuertes deben enseñar.”</label><br><br>
+  
+        <button type="submit">Enviar respuestas</button>
+      </form>
+  
+      <div id="resultado"></div>
+    </div>
+  </div>
+  
+  <!-- ESTILOS PARA EL MODAL -->
+  <style>
+  .modal {
+    display: none;
+    position: fixed;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(194, 179, 179, 0.5);
+    z-index: 1000;
+  }
+  .modal-contenido {
+    background: rgb(141, 117, 228);
+    margin: 5% auto;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  .cerrar { float: right; cursor: pointer; font-size: 24px; }
+  .correcta { color: green; }
+  .incorrecta { color: red; }
+  #resultado { margin-top: 15px; font-size: 16px; }
+  </style>
+  
+  <!-- SCRIPT para abrir/cerrar el MODAL -->
+  <script>
+  const modal = document.getElementById("modalTrivia");
+  const btnAbrir = document.getElementById("abrirTrivia");
+  const btnCerrar = document.querySelector(".cerrar");
+  btnAbrir.onclick = () => { modal.style.display = "block"; };
+  btnCerrar.onclick = () => { modal.style.display = "none"; };
+  window.onclick = (e) => { if (e.target === modal) modal.style.display = "none"; };
+  </script>
+  
+  <!-- SCRIPT de la TRIVIA -->
+  <script>
+  document.getElementById("formTrivia").addEventListener("submit", function(e) {
+    e.preventDefault();
+  
+    let puntaje = 0;
+    let salida = "";
+  
+    // Pregunta 1
+    let r1 = document.querySelector('input[name="p1"]:checked');
+    if (r1) {
+      if (r1.value === "Ayegui") {
+        puntaje++;
+        salida += "<p class='correcta'>1. ✔ Correcta</p>";
+      } else {
+        salida += "<p class='incorrecta'>1. ✘ Incorrecta. Correcta: Ayegui, Navarra, España</p>";
+      }
+    } else {
+      salida += "<p class='incorrecta'>1. ✘ No respondida. Correcta: Ayegui, Navarra, España</p>";
+    }
+  
+    // Pregunta 2
+    let r2 = document.querySelector('input[name="p2"]:checked');
+    if (r2) {
+      if (r2.value === "Escolapios") {
+        puntaje++;
+        salida += "<p class='correcta'>2. ✔ Correcta</p>";
+      } else {
+        salida += "<p class='incorrecta'>2. ✘ Incorrecta. Correcta: Orden de las Escuelas Pías (Escolapios)</p>";
+      }
+    } else {
+      salida += "<p class='incorrecta'>2. ✘ No respondida. Correcta: Orden de las Escuelas Pías (Escolapios)</p>";
+    }
+  
+    // Pregunta 3
+    let r3 = document.querySelector('input[name="p3"]:checked');
+    if (r3) {
+      if (r3.value === "Paciencia") {
+        puntaje++;
+        salida += "<p class='correcta'>3. ✔ Correcta</p>";
+      } else {
+        salida += "<p class='incorrecta'>3. ✘ Incorrecta. Correcta: Su paciencia y perseverancia a pesar de la enfermedad</p>";
+      }
+    } else {
+      salida += "<p class='incorrecta'>3. ✘ No respondida. Correcta: Su paciencia y perseverancia a pesar de la enfermedad</p>";
+    }
+  
+    // Pregunta 4
+    let r4 = document.querySelector('input[name="p4"]:checked');
+    if (r4) {
+      if (r4.value === "Ejecutado") {
+        puntaje++;
+        salida += "<p class='correcta'>4. ✔ Correcta</p>";
+      } else {
+        salida += "<p class='incorrecta'>4. ✘ Incorrecta. Correcta: Fue ejecutado junto al hermano Florentín Felipe en Azanuy</p>";
+      }
+    } else {
+      salida += "<p class='incorrecta'>4. ✘ No respondida. Correcta: Fue ejecutado junto al hermano Florentín Felipe en Azanuy</p>";
+    }
+  
+    // Pregunta 5
+    let r5 = document.querySelector('input[name="p5"]:checked');
+    if (r5) {
+      if (r5.value === "Grandeza") {
+        puntaje++;
+        salida += "<p class='correcta'>5. ✔ Correcta</p>";
+      } else {
+        salida += "<p class='incorrecta'>5. ✘ Incorrecta. Correcta: “La verdadera grandeza se mide por la humildad y el servicio a los demás.”</p>";
+      }
+    } else {
+      salida += "<p class='incorrecta'>5. ✘ No respondida. Correcta: “La verdadera grandeza se mide por la humildad y el servicio a los demás.”</p>";
+    }
+  
+    // Resultado final
+    salida += `<h4>Puntaje final: ${puntaje} de 5</h4>`;
+  
+    // Retroalimentación según el puntaje
+    if (puntaje === 5) {
+      salida += "<p class='correcta'>🌟 ¡Excelente! Conoces muy bien la vida y legado del Beato Faustino Oteiza Segura.</p>";
+    } else if (puntaje >= 3) {
+      salida += "<p>👍 ¡Muy bien! Pero podrías repasar algunos detalles de su vida.</p>";
+    } else {
+      salida += "<p class='incorrecta'>📘 Te recomiendo leer nuevamente su biografía y su ejemplo de fe y educación.</p>";
+    }
+  
+    document.getElementById("resultado").innerHTML = salida;
+  });
+  </script>
+  
 </body>
 </html>
